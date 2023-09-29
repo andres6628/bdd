@@ -4,19 +4,12 @@ public class TestRectangulo {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Rectangulo r1 = new Rectangulo();
-		Rectangulo r2 = new Rectangulo();
+		Rectangulo r1 = new Rectangulo(10,5);
+		Rectangulo r2 = new Rectangulo(8,3);
 		int area1;
 		int area2;
 		double perimetro1;
 		double perimetro2;
-		
-		
-		r1.setAltura(5);
-		r1.setBase(10);
-		
-		r2.setAltura(3);
-		r2.setBase(8);
 		
 		area1 = r1.calcularArea();
 		area2 = r2.calcularArea();

@@ -4,16 +4,10 @@ public class TestAuto {
 
 	public static void main(String[] args) {
 
-		Auto auto1 = new Auto();
-		Auto auto2 = new Auto();
+		Auto auto1 = new Auto("Chevrolet",2023,25000);
+		Auto auto2 = new Auto("Nisan",2022,18000);
 		
-		auto1.setMarca("Chevrolet");
-		auto1.setAnio(2023);
-		auto1.setPrecio(25000);
 		
-		auto2.setMarca("Nisan");
-		auto2.setAnio(2022);
-		auto2.setPrecio(18000);
 		
 		System.out.println("**AUTO 1**");
 		System.out.println("Marca: " + auto1.getMarca());
