@@ -1,9 +1,10 @@
 package com.krakedev;
 
-public class Gestor {
+public class TestFecha {
 
 	public static void main(String[] args) {
-		System.out.println("Hola mundo");
+		// TODO Auto-generated method stub
+
 	}
 
 }
