@@ -134,6 +134,18 @@ ALTER TABLE personas
 ADD CONSTRAINT cedula_fk
 PRIMARY KEY (cedula);
 
+insert into personas values('0000000001','Andres','Villacres',1.8,'1997-12-12','4:30',200,0,'C');
+insert into personas values('0000000002','Anderson','Villacres',1.8,'1997-12-12','4:30',200,0,'C');
+insert into personas values('0000000003','Maria','Villacis',1.8,'1997-12-12','4:30',200,0,'C');
+insert into personas values('0000000004','Belen','Villa',1.8,'1997-12-12','4:30',200,0,'C');
+insert into personas values('0000000005','Jessica','Villares',1.8,'1997-12-12','4:30',200,0,'C');
+insert into personas values('0000000006','Carlos','Paucar',1.8,'1997-12-12','4:30',200,0,'C');
+insert into personas values('0000000007','Pedro','Trump',1.8,'1997-12-12','4:30',200,0,'C');
+insert into personas values('0000000008','Jose','Arias',1.8,'1997-12-12','4:30',200,0,'C');
+insert into personas values('0000000009','Jairo','Gomez',1.8,'1997-12-12','4:30',200,0,'C');
+insert into personas values('0000000010','David','Jerez',1.8,'1997-12-12','4:30',200,0,'C');
+insert into personas values('0000000011','Daniel','Marin',1.8,'1997-12-12','4:30',200,0,'C');
+
 CREATE TABLE prestamo(
     cedula char(10) references personas(cedula),
     monto money,
@@ -141,6 +153,20 @@ CREATE TABLE prestamo(
     hora_prestamo time,
     garante varchar(40)
 );
+
+insert into prestamo values('0000000001',5000,'2023-10-23','10:00','Andres Villacres');
+insert into prestamo values('0000000002',10000,'2023-10-23','10:00','Andres Villacres');
+insert into prestamo values('0000000003',500,'2023-10-23','10:00','Andres Villacres');
+insert into prestamo values('0000000001',2000,'2023-10-23','10:00','Andres Jerez');
+insert into prestamo values('0000000002',5000,'2023-10-23','10:00','Andres Jerez');
+insert into prestamo values('0000000003',5000,'2023-10-23','10:00','Andres Villacres');
+insert into prestamo values('0000000001',22000,'2023-10-23','10:00','Carlos Paucar');
+insert into prestamo values('0000000002',45000,'2023-10-23','10:00','Jose Paucar');
+insert into prestamo values('0000000003',30000,'2023-10-23','10:00','Andres Villacres');
+insert into prestamo values('0000000001',75000,'2023-10-23','10:00','Edwin Villacres');
+insert into prestamo values('0000000002',1000,'2023-10-23','10:00','Vanessa Villacres');
+
+insert into prestamo values('');
 
 CREATE TABLE transacciones(
     codigo int primary key,
