@@ -19,6 +19,20 @@ CREATE TABLE cuentas(
     saldo money not null
 );
 
+alter table cuentas
+add tipo_cuenta varchar(20),
+
+update cuentas
+set tipo_cuenta = 'Ahorros'
+where cedula like '%0%'
+
+select tipo_cuenta, COUNT(numero_cuenta) from cuentas
+group by tipo_cuenta
+
+select AVG(saldo) from cuentas 
+where cedula = (select cedula from ususario 
+                where cedula = '0000000000'); 
+
 create table clientes(
 cedula char(10) primary key,
 nombre varchar(50) not null,
@@ -33,7 +47,7 @@ create table compras(
     monto float not null
 );
 
-
+select 
 create table productos(
     codigo int primary key,
     nombre varchar(50) not null,
