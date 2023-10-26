@@ -47,7 +47,13 @@ create table compras(
     monto float not null
 );
 
-select 
+select fecha_compra, COUNT(monto) from compras 
+where fecha_compra = '2023-10-23'
+group by fecha_compra
+
+select cedula, COUNT(monto) as "total monto" from compras
+group BY cedula
+
 create table productos(
     codigo int primary key,
     nombre varchar(50) not null,
@@ -56,13 +62,15 @@ create table productos(
     stock int not null
 );
 
-
+select MAX(precio) as "precio maximo" from productos
 create table ventas (
     id_ventas int primary key,
     codigo_producto int references productos(codigo),
     fecha_venta date not null,
     cantidad int
 );
+
+select SUM(cantidad) from ventas
 
 
 create table videojuegos(
@@ -71,13 +79,15 @@ create table videojuegos(
     descripcion varchar(300),
     valoracion int not null
 );
-
+select ROUND(AVG(valoracion)) as "Promedio valoracion" from videojuegos
 
 create table plataformas(
     id_plataforma int primary key,
     nombre_plataforma varchar(50) not null,
     codigo_videojuegos int references videojuegos(codigo)
 );
+select codigo_videojuegos, COUNT(id_plataforma) from plataformas 
+group by codigo_videojuegos
 
 create table colegio(
     nombre varchar(50) not null,
@@ -116,6 +126,16 @@ add CONSTRAINT estudiantes_profesores_fk
 FOREIGN key (codigo_profesor)
 references profesores(codigo)
 
+insert into estudiantes values('0000000000','Andres','Villacres','correo@mail.com','1997-12-18',1);
+insert into estudiantes values('0000000001','Carlos','Villacis','correo@mail.com','1997-12-17',1);
+insert into estudiantes values('0000000002','Pedro','Villa','correo@mail.com','1997-12-16',1);
+insert into estudiantes values('0000000003','Martin','Villares','correo@mail.com','1997-12-15',2);
+insert into estudiantes values('0000000004','Mario','Velez','correo@mail.com','1997-12-14',2);
+insert into estudiantes values('0000000005','Maria','Veloz','correo@mail.com','1997-12-13',2);
+
+select ROUND(AVG(EXTRACT(YEAR from AGE(CURRENT_DATE,fecha_nacimiento)))) from estudiantes
+select codigo_profesor, COUNT(cedula) from estudiantes
+group by codigo_profesor
 
 CREATE TABLE empleado(
     codigo_empleado int primary key,
@@ -132,6 +152,10 @@ CREATE table registros_entrada(
     hora time not null,
     codigo_empleado int references empleado(codigo_empleado)
 );
+select cedula_empleado, COUNT(codigo_registro) from registros_entrada
+group by cedula_empleado
+
+select MAX(fecha) as "fecha maxima", MIN(fecha) as "fecha minima" from registros_entrada
 
 insert into registros_entrada values(1,'0000000001','2023-10-23','8:00',1);
 insert into registros_entrada values(2,'0000000002','2023-10-23','8:01',2);
@@ -147,6 +171,8 @@ insert into registros_entrada values(10,'0000000010','2023-10-23','8:09',1);
 ALTER TABLE personas
 ADD CONSTRAINT cedula_fk
 PRIMARY KEY (cedula);
+
+select COUNT(cedula) as "total personas" from personas where numero_hijos > 1
 
 insert into personas values('0000000001','Andres','Villacres',1.8,'1997-12-12','4:30',200,0,'C');
 insert into personas values('0000000002','Anderson','Villacres',1.8,'1997-12-12','4:30',200,0,'C');
@@ -167,6 +193,9 @@ CREATE TABLE prestamo(
     hora_prestamo time,
     garante varchar(40)
 );
+
+select SUM(monto) from prestamo
+group by cedula
 
 insert into prestamo values('0000000001',5000,'2023-10-23','10:00','Andres Villacres');
 insert into prestamo values('0000000002',10000,'2023-10-23','10:00','Andres Villacres');
@@ -191,7 +220,8 @@ CREATE TABLE transacciones(
     hora time
 );
 
-
+select COUNT(codigo) from transacciones where tipo = 'C'
+select numero_cuenta, ROUND(AVG(monto::decimal)) from transacciones group by numero_cuenta
 CREATE TABLE banco(
     codigo_banco int primary key,
     codigo_transaccion int references transacciones(codigo),
